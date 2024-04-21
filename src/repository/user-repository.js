@@ -24,9 +24,21 @@ class UserRepository {
         }
     }
 
+    async getByEmail(userEmail) {
+        try {
+            const user = await User.findOne({where: {
+                email: userEmail
+            }});
+            return user;
+        } catch (error) {
+            console.log("Something went wrong on repository layer");
+            throw error;
+        }
+    }
+
     async getById(userId) {
         try {
-            const user = await user.findByPk(userid, {
+            const user = await user.findByPk(userId, {
                 attributes: ['email', 'id']
             });
             return user;
