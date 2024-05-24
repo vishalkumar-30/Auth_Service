@@ -1,5 +1,6 @@
 const { response } = require('express');
 const UserService = require('../services/user-service');
+const { StatusCodes } = require('http-status-codes');
 
 const userService = new UserService();
 

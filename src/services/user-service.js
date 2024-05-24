@@ -2,6 +2,7 @@ const UserRepository = require('../repository/user-repository');
 const jwt = require('jsonwebtoken'); 
 const {JWT_KEY} = require('../config/serverConfig');
 const bcrypt = require('bcrypt');
+const AppErrors = require("../utils/error-handler");
 
 class UserService {
     constructor() {
@@ -13,6 +14,9 @@ class UserService {
             const user = await this.userRepository.create(data);
             return user;
         } catch (error) {
+            if (error == 'ValidationError') {
+                throw error;
+            }
             console.log("Something went wrong in the service layer");
             throw error;
         }
